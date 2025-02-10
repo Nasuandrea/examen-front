@@ -3,7 +3,7 @@ name: Deploy Docker to Vercel
 on:
   push:
     branches:
-      - main  
+      - main  # Ejecutar en cada push a main
 
 jobs:
   deploy:
@@ -12,12 +12,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: Build Docker image
         run: docker build -t my-nginx-app .
 
-      - name: Login to Vercel
-        run: npx vercel login --token ${{ secrets.VERCEL_TOKEN }}
-
       - name: Deploy to Vercel
         run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+
